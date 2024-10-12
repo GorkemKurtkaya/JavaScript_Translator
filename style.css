@@ -25,11 +25,27 @@ body {
     border: 1px solid #7F8487;
 }
 
-.controls {
+.controls, .controls li, .icons, .icons i {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
+
+.controls .icons i{
+    width: 40px;
+    color: #7F8487;
+    font-size: 16px;
+    cursor: pointer;
+    justify-content: center;
+}
+
+.controls .icons{
+    width: 35%;
+}
+
+.controls .icons i:hover {
+    color: #000;
+} 
 
 ul {
     list-style: none;

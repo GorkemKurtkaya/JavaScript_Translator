@@ -3,6 +3,8 @@ const toLang=document.querySelector('#to-lang');
 const btnTranslate=document.querySelector('#btn-translate');
 const fromtext=document.querySelector('#from-text');
 const totext=document.querySelector('#to-text');
+const exchange=document.querySelector('.exchange');
+const icons=document.querySelectorAll('.icons');
 
 
 
@@ -29,4 +31,36 @@ btnTranslate.addEventListener("click",()=>{
         })
 })
 
-// const url="https://api.mymemory.translated.net/get?q=Hello World!&langpair=en|it"
+exchange.addEventListener("click",()=>{
+    let text=fromtext.value;
+    fromtext.value=totext.value;
+    totext.value=text;
+
+
+    let lang=fromLang.value;
+    fromLang.value=toLang.value;
+    toLang.value=lang;
+})
+
+for(let icon of icons){
+    icon.addEventListener("click",(element)=>{
+        if(element.target.classList.contains("fa-copy")){
+            if(element.target.id=="from"){
+                navigator.clipboard.writeText(fromtext.value);
+            }else{
+                navigator.clipboard.writeText(totext.value);
+            }
+        }else{
+            let utterance;
+            if(element.target.id=="from"){
+                utterance = new SpeechSynthesisUtterance(fromtext.value);
+                utterance.lang=fromLang.value;
+            }else{
+                utterance = new SpeechSynthesisUtterance(totext.value);
+                utterance.lang=toLang.value;
+            }
+            speechSynthesis.speak(utterance);
+        }
+    
+    })
+}
